@@ -2,148 +2,257 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miriana Angelini’s Secret Room</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Miriana's Secret Room</title>
     <style>
-        /* Base styles */
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #ffccf9;
-            text-align: center;
+        * {
             margin: 0;
-            position: relative;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
             min-height: 100vh;
-            overflow-x: hidden;
-            padding: 20px;
+            background: fixed url('https://i.makeagif.com/media/3-07-2018/0hVJba.gif') center/cover;
+            overflow: hidden;
         }
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
+        .overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,97,215,0.1), rgba(109,251,255,0.1));
+            z-index: 1;
+        }
+
+        .vapor-particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
             z-index: 2;
+            pointer-events: none;
+            overflow: hidden;
         }
 
-        h1 {
-            color: #ff1493;
-            font-size: 48px;
-            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.5);
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 24px;
-            color: #ff1493;
-            margin: 10px 0;
-        }
-
-        .highlight {
-            font-weight: bold;
-            color: #ff1493;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 5px 10px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-
-        .heart {
-            color: #ff1493;
-            font-size: 36px;
-            animation: float 3s ease-in-out infinite;
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+            filter: blur(2px);
+            opacity: 0.6;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(100vw, -50vh) scale(1.5); }
         }
 
-        .heart-background {
+        .container {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .spinning-title {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 200%;
-            z-index: 1;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23ff1493' fill-opacity='0.2'%3E%3Cpath d='M50 90.7c-10.5 0-20.3-5.2-26.3-13.8C11.7 61.8 2 46.6 2 30.5 2 14.8 14.8 2 30.5 2c8.8 0 17.1 4.2 22.5 11.2C58.4 6.2 66.7 2 75.5 2 91.2 2 104 14.8 104 30.5c0 16.1-9.7 31.3-21.7 46.4-6 8.6-15.8 13.8-26.3 13.8z'/%3E%3C/g%3E%3C/svg%3E");
-            background-repeat: repeat;
-            animation: scroll-hearts 20s linear infinite;
+            width: min(220px, 60vw);
+            height: min(220px, 60vw);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotateTitle 25s linear infinite;
         }
 
-        @keyframes scroll-hearts {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        .spinning-title span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform-origin: 0 min(110px, 30vw);
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            font-weight: bold;
+            color: #ff61d7;
+            text-shadow: 0 0 15px rgba(255,97,215,0.9),
+                         0 0 25px rgba(255,97,215,0.7),
+                         0 0 35px rgba(255,97,215,0.5);
+            animation: letterGlow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes rotateTitle {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes letterGlow {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; filter: brightness(1.5); }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 4;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            padding: 1.5rem;
+        }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .contact-list li {
+            margin: 1.2rem 0;
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,97,215,0.7),
+                         0 0 20px rgba(109,251,255,0.5);
+        }
+
+        .contact-list a {
+            color: #6dfbff;
+            text-decoration: none;
+            padding: 0.2rem 0.4rem;
+            display: inline-block;
+            transition: color 0.3s;
+            font-size: clamp(1rem, 4vw, 1.2rem);
         }
 
         .portfolio-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 20px;
-            color: #fff;
-            background-color: #ff1493;
-            border: none;
-            border-radius: 10px;
+            padding: 1rem 2rem;
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            background: transparent;
+            border: 2px solid #7d6fff;
+            color: white;
+            border-radius: 30px;
             cursor: pointer;
-            text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            margin-top: 1.5rem;
+            min-width: 180px;
+            backdrop-filter: blur(3px);
         }
 
-        .portfolio-button:hover {
-            background-color: #ff6f61;
+        .portfolio-button:hover, .portfolio-button:active {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(125,111,255,0.5);
         }
 
-        .emoji-gif {
-            width: 40px;
-            height: 40px;
-            vertical-align: middle;
-            margin: 0 5px;
+        .portfolio-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent, 
+                rgba(255,97,215,0.5), 
+                rgba(125,111,255,0.5), 
+                transparent);
+            animation: border-anim 4s linear infinite;
         }
 
-        /* Mobile adjustments */
         @media (max-width: 768px) {
-            body { padding: 10px; }
-            h1 { font-size: 32px; }
+            .spinning-title {
+                width: 50vw;
+                height: 50vw;
+            }
+            
+            .spinning-title span {
+                transform-origin: 0 25vw;
+            }
+            
+            .content-wrapper {
+                padding: 1rem;
+            }
+            
+            .portfolio-button {
+                padding: 0.8rem 1.5rem;
+                min-width: 160px;
+            }
         }
 
-        /* Desktop adjustments */
-        @media (min-width: 1024px) {
-            .container { padding: 30px; }
+        @keyframes border-anim {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="heart-background"></div>
+    <div class="overlay"></div>
+    <div class="vapor-particles"></div>
+    
     <div class="container">
-        <h1>
-            <img src="https://media.giphy.com/media/IJXeGQO62fm5a/giphy.gif" class="emoji-gif" alt="Sparkles">
-            Miriana Angelini’s Secret Room
-            <img src="https://media.giphy.com/media/IJXeGQO62fm5a/giphy.gif" class="emoji-gif" alt="Sparkles">
-        </h1>
-        <p>
-            Call her now: 
-            <span class="highlight">
-                <img src="https://media.giphy.com/media/wvsp7s7qIGkrS/giphy.gif" class="emoji-gif" alt="E">
-                393513506444
-                <img src="https://media.tenor.com/4hA7s7Y5z3AAAAAC/e.gif" class="emoji-gif" alt="Kiss">
-            </span>
-        </p>
-        <p>
-            She's very hot and only 
-            <span class="highlight">2 km</span> from you! 
-            <img src="https://media.tenor.com/4hA7s7Y5z3AAAAAC/e.gif" class="emoji-gif" alt="Kiss">
-        </p>
-        <div class="heart">❤️</div>
-        <a href="portfolio.html" class="portfolio-button">
-            <img src="https://media.giphy.com/media/IJXeGQO62fm5a/giphy.gif" class="emoji-gif" alt="Sparkles">
-            Portfolio
-            <img src="https://media.giphy.com/media/IJXeGQO62fm5a/giphy.gif" class="emoji-gif" alt="Sparkles">
-        </a>
+        <div class="spinning-title"></div>
+
+        <div class="content-wrapper">
+            <ul class="contact-list">
+                <li>Email: <a href="mailto:mirianamathiaz@gmail.com">mirianamathiaz@gmail.com</a></li>
+                <li>Phone: <a href="tel:351350646">351350646</a></li>
+            </ul>
+
+            <a href="portfolio.html">
+                <button class="portfolio-button">
+                    <span>Enter Portfolio</span>
+                </button>
+            </a>
+        </div>
     </div>
+
+    <script>
+        // Responsive title creation
+        const title = "Miriana's Secret Room";
+        const container = document.querySelector('.spinning-title');
+        const baseRadius = Math.min(window.innerWidth * 0.3, 110);
+        
+        title.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            const rotate = (index * 360) / title.length;
+            span.style.transform = `rotate(${rotate}deg) translateX(${baseRadius}px)`;
+            span.style.animationDelay = `${index * 0.1}s`;
+            container.appendChild(span);
+        });
+
+        // Responsive particles creation
+        function createParticles() {
+            const particlesContainer = document.querySelector('.vapor-particles');
+            const colors = ['#ff61d7', '#6dfbff', '#7d6fff'];
+            const particleCount = window.innerWidth < 768 ? 100 : 200;
+            
+            for(let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    width: ${Math.random() * (window.innerWidth < 768 ? 4 : 6) + 2}px;
+                    height: ${Math.random() * (window.innerWidth < 768 ? 4 : 6) + 2}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    animation-duration: ${Math.random() * 10 + 5}s;
+                    animation-delay: ${Math.random() * 5}s;
+                    filter: blur(${Math.random() * 2}px);
+                    opacity: ${Math.random() * 0.4 + 0.2};
+                `;
+                particlesContainer.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.particle').forEach(p => p.remove());
+            createParticles();
+        });
+    </script>
 </body>
 </html>
