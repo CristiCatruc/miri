@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miriana's Portfolio</title>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffccf9;
+            text-align: center;
+            margin: 0;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            color: #ff1493;
+            font-size: 48px;
+            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .portfolio-image {
+            max-width: 90%;
+            max-height: 70vh;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 20px;
+            color: #fff;
+            background-color: #ff1493;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #ff6f61;
+        }
+
+        .heart-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            z-index: 1;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23ff1493' fill-opacity='0.2'%3E%3Cpath d='M50 90.7c-10.5 0-20.3-5.2-26.3-13.8C11.7 61.8 2 46.6 2 30.5 2 14.8 14.8 2 30.5 2c8.8 0 17.1 4.2 22.5 11.2C58.4 6.2 66.7 2 75.5 2 91.2 2 104 14.8 104 30.5c0 16.1-9.7 31.3-21.7 46.4-6 8.6-15.8 13.8-26.3 13.8z'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
+            animation: scroll-hearts 20s linear infinite;
+        }
+
+        @keyframes scroll-hearts {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .emoji-gif {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            h1 { font-size: 32px; }
+            .portfolio-image { max-height: 50vh; }
+        }
+
+        /* Desktop adjustments */
+        @media (min-width: 1024px) {
+            .container { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-background"></div>
+    <div class="container">
+        <h1>
+            <img src="https://media.giphy.com/media/IJXeGQO62fm5a/giphy.gif" class="emoji-gif" alt="Sparkles">
+            Miriana's Portfolio
+            <img src="https://media.giphy.com/media/IJXeGQO62fm5a/giphy.gif" class="emoji-gif" alt="Sparkles">
+        </h1>
+        <img src="IMG_5819.png" alt="Miriana's Picture" class="portfolio-image">
+        <a href="index.html" class="back-button">
+            <img src="https://media.tenor.com/4hA7s7Y5z3AAAAAC/e.gif" class="emoji-gif" alt="Kiss">
+            Back to Main Page
+            <img src="https://media.tenor.com/4hA7s7Y5z3AAAAAC/e.gif" class="emoji-gif" alt="Kiss">
+        </a>
+    </div>
+</body>
+</html>
